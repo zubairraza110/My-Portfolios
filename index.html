@@ -21,6 +21,114 @@
     --radius:   14px;
     --glow:     0 0 40px rgba(0,212,255,0.15);
   }
+  /* ── LIGHT MODE VARIABLES ── */
+  body.light-mode {
+    --bg:       #f0f4f8;
+    --bg2:      #e2e8f0;
+    --bg3:      #ffffff;
+    --border:   rgba(0,0,0,0.09);
+    --accent:   #ff571f;
+    --accent2:  #d97706;
+    --text:     #0f172a;
+    --muted:    #475569;
+    --card-bg:  rgba(255,255,255,0.85);
+    --glow:     0 0 40px rgba(0,119,170,0.12);
+  }
+  body.light-mode nav {
+    background: rgba(240,244,248,0.88) !important;
+  }
+  body.light-mode .mobile-menu {
+    background: rgba(240,244,248,0.98);
+  }
+  body.light-mode .hero-grid {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  }
+  body.light-mode .floating-card {
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  body.light-mode ::-webkit-scrollbar-track { background: var(--bg); }
+  body.light-mode .about-img-inner {
+    background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+  }
+  body.light-mode .profile-name-ph { color: #64748b; }
+  body.light-mode .profile-hint { color: rgba(100,116,139,0.5); }
+  body.light-mode .testi-card::before { color: rgba(0,119,170,0.08); }
+
+  /* ── THEME TOGGLE PILL ── */
+  .theme-toggle {
+    position: relative;
+    width: 154px; height: 42px;
+    border-radius: 50px;
+    border: none; padding: 0; cursor: pointer;
+    flex-shrink: 0; overflow: hidden;
+    background: transparent;
+    outline: none;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: box-shadow 0.3s;
+  }
+  .theme-toggle:hover { box-shadow: 0 5px 20px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.1); }
+
+  /* track — two halves rendered as pseudo-elements */
+  .tt-track {
+    position: absolute; inset: 0; border-radius: 50px;
+    background: linear-gradient(90deg, #ff591f 0%, #ff561f 40%, #fb923c 100%);
+    transition: background 0.45s ease;
+  }
+  body:not(.light-mode) .tt-track {
+    background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 55%, #3b82f6 100%);
+  }
+
+  /* label left (DAY) */
+  .tt-label-day {
+    position: absolute; left: 46px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: opacity 0.3s;
+    pointer-events: none; user-select: none;
+    opacity: 1;
+  }
+  body:not(.light-mode) .tt-label-day { opacity: 0; }
+
+  /* label right (NIGHT) */
+  .tt-label-night {
+    position: absolute; right: 46px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.1em; color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: opacity 0.3s;
+    pointer-events: none; user-select: none;
+    opacity: 0;
+  }
+  body:not(.light-mode) .tt-label-night { opacity: 1; }
+
+  /* thumb circle */
+  .tt-thumb {
+    position: absolute; top: 4px;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 2px rgba(255,255,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    transition: left 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+    left: calc(100% - 38px);
+    pointer-events: none;
+  }
+  body.light-mode .tt-thumb { left: 4px; }
+
+  /* sun icon inside thumb */
+  .tt-thumb .tt-icon-sun  { position: absolute; transition: opacity 0.25s, transform 0.3s; }
+  .tt-thumb .tt-icon-moon { position: absolute; transition: opacity 0.25s, transform 0.3s; }
+  .tt-thumb .tt-icon-sun  { opacity: 0; transform: rotate(-45deg) scale(0.7); }
+  .tt-thumb .tt-icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+  body.light-mode .tt-thumb .tt-icon-sun  { opacity: 1; transform: rotate(0deg) scale(1); }
+  body.light-mode .tt-thumb .tt-icon-moon { opacity: 0; transform: rotate(45deg) scale(0.7); }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
@@ -29,6 +137,7 @@
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
+    transition: background 0.35s ease, color 0.35s ease;
   }
   h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
   a { text-decoration: none; color: inherit; }
@@ -204,7 +313,7 @@
     border-radius: var(--radius);
     padding: 1rem 1.4rem;
     backdrop-filter: blur(12px);
-    min-width: 200px;
+    max-width: 420px;
   }
   .floating-card:nth-child(1) { animation: float1 3s ease-in-out infinite; }
   .floating-card:nth-child(2) { animation: float2 3.5s ease-in-out infinite; margin-left: 40px; }
@@ -221,44 +330,51 @@
   #about { background: var(--bg2); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   .about-img-wrap { position: relative; }
-  .about-img {
-    width: 100%; aspect-ratio: 4/5; border-radius: 20px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .about-img::before {
-    content: ''; position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: conic-gradient(transparent, rgba(0,212,255,0.08), transparent 30%);
-    animation: rotateBg 8s linear infinite;
-  }
-  .about-img-inner {
-    position: relative; z-index: 1;
-    width: calc(100% - 4px); height: calc(100% - 4px);
-    border-radius: 18px;
-    background: linear-gradient(135deg, #0c1220, #111827);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 1rem;
-  }
-  .profile-avatar {
-    width: 100px; height: 100px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), #0077aa);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--bg);
-  }
-  .profile-name-ph { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--muted); }
-  .profile-hint { font-size: 0.78rem; color: rgba(148,163,184,0.5); }
-  @keyframes rotateBg { to { transform: rotate(360deg); } }
-  .about-badge {
-    position: absolute; bottom: -20px; right: -20px;
-    background: var(--accent); color: var(--bg);
-    border-radius: var(--radius); padding: 1rem 1.4rem;
-    font-family: 'Syne', sans-serif;
-  }
-  .about-badge .num { font-size: 2rem; font-weight: 800; line-height: 1; }
-  .about-badge .txt { font-size: 0.78rem; font-weight: 600; }
+
+.about-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 20px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-img::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(0,212,255,0.15), transparent 30%);
+  animation: rotateBg 8s linear infinite;
+}
+
+.about-img-inner {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.about-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes rotateBg {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   .about-text h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.2rem; }
   .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
   .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
@@ -366,44 +482,6 @@
   .proj-tech { font-size: 0.7rem; color: var(--muted); background: rgba(255,255,255,0.04); padding: 2px 8px; border-radius: 4px; }
   .proj-link { color: var(--accent); font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; gap: 4px; }
   .proj-link:hover { text-decoration: underline; }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials { background: var(--bg2); overflow: hidden; }
-  .testi-container { position: relative; }
-  .testi-track-wrap { overflow: hidden; border-radius: var(--radius); }
-  .testi-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-  .testi-slide { min-width: 100%; padding: 2px; }
-  .testi-inner { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  .testi-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 2rem;
-    position: relative;
-  }
-  .testi-card::before { content: '"'; font-size: 5rem; line-height: 1; font-family: 'Syne', sans-serif; font-weight: 800; color: rgba(0,212,255,0.1); position: absolute; top: 1rem; right: 1.5rem; }
-  .stars { color: var(--accent2); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
-  .testi-text { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
-  .testi-author { display: flex; align-items: center; gap: 12px; }
-  .testi-avatar {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), #0077aa);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1rem; color: var(--bg);
-    font-family: 'Syne', sans-serif; flex-shrink: 0;
-  }
-  .testi-info .name { font-weight: 700; font-size: 0.92rem; }
-  .testi-info .role { font-size: 0.78rem; color: var(--muted); }
-  .testi-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }
-  .testi-btn {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--bg3); border: 1px solid var(--border);
-    color: var(--text); font-size: 1.1rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .testi-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .testi-dots { display: flex; gap: 8px; }
-  .testi-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.2s; }
-  .testi-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
 
   /* ── CONTACT ── */
   #contact { background: var(--bg); }
@@ -524,6 +602,12 @@
     .about-highlights { grid-template-columns: 1fr; }
     .hero-name { letter-spacing: -1px; }
     .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    .theme-toggle { width: 72px; }
+    .tt-label-day, .tt-label-night { display: none; }
+    .tt-thumb { width: 30px; height: 30px; top: 5px; font-size: 0.95rem; }
+    body.light-mode .tt-thumb { left: 5px; }
+    .theme-toggle { height: 40px; }
+    body:not(.light-mode) .tt-thumb { left: calc(100% - 35px); }
   }
   @media (max-width: 500px) {
     section { padding: 70px 5%; }
@@ -535,15 +619,23 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" href="#hero">YN<span>.</span></a>
+  <a class="nav-logo" href="#hero">ZUBAIR RAZA<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact" class="nav-cta">Hire Me</a></li>
   </ul>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
+    <div class="tt-track"></div>
+    <span class="tt-label-day">DAY MODE</span>
+    <span class="tt-label-night">NIGHT MODE</span>
+    <div class="tt-thumb">
+      <span class="tt-icon-sun">☀️</span>
+      <span class="tt-icon-moon">🌙</span>
+    </div>
+  </button>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
@@ -556,7 +648,6 @@
   <a href="#skills" onclick="toggleMenu()">Skills</a>
   <a href="#services" onclick="toggleMenu()">Services</a>
   <a href="#projects" onclick="toggleMenu()">Projects</a>
-  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
   <a href="#contact" onclick="toggleMenu()">Hire Me</a>
 </div>
 
@@ -568,10 +659,10 @@
     <div class="hero-badge">
       <span class="dot"></span> Available for New Projects
     </div>
-    <h1 class="hero-name">Your<br/><span class="accent">Name</span></h1>
+    <h1 class="hero-name">Zubair<br/><span class="accent">Raza</span></h1>
     <p class="hero-title">Multi-Platform Web Developer & E-Commerce Specialist</p>
     <p class="hero-desc">
-      From a single landing page to a full platform migration — I build, customize, and optimize web experiences across Shopify, BigCommerce, Squarespace, Webflow, GHL, HubSpot, and beyond.
+      From a single landing page to a full platform migration — I build, customize, and optimize web experiences across Shopify, BigCommerce, SquareSpace, WebFlow, GHL, HubSpot, and beyond.
     </p>
     <div class="hero-btns">
       <a href="#projects" class="btn-primary">View My Work →</a>
@@ -580,17 +671,17 @@
     <div class="hero-platforms">
       <span class="platform-tag">Shopify</span>
       <span class="platform-tag">BigCommerce</span>
-      <span class="platform-tag">Squarespace</span>
-      <span class="platform-tag">Webflow</span>
+      <span class="platform-tag">SquareSpace</span>
+      <span class="platform-tag">WebFlow</span>
       <span class="platform-tag">GHL</span>
       <span class="platform-tag">HubSpot</span>
       <span class="platform-tag">React</span>
       <span class="platform-tag">SEO</span>
     </div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">50+</div><div class="label">Projects Done</div></div>
-      <div class="hero-stat"><div class="num">6+</div><div class="label">Platforms</div></div>
-      <div class="hero-stat"><div class="num">100%</div><div class="label">Client Satisfaction</div></div>
+      <div class="hero-stat"><div class="num">3+</div><div class="label">Projects Done</div></div>
+      <div class="hero-stat"><div class="num">5+</div><div class="label">Platforms</div></div>
+      <div class="hero-stat"><div class="num">98.9%</div><div class="label">Client Satisfaction</div></div>
     </div>
   </div>
   <div class="hero-visual">
@@ -606,14 +697,16 @@
     </div>
     <div class="floating-card">
       <div class="fc-label">Platform Migration</div>
-      <div class="fc-val">Squarespace → Webflow</div>
+      <div class="fc-val">Figma → Shopify</div>
+      <div class="fc-val">Drupal → SquareSpace</div>
       <div class="fc-sub">Zero downtime</div>
     </div>
     <div class="floating-card">
       <div class="fc-label">Figma to Code</div>
       <div class="fc-val">Pixel-Perfect</div>
-      <div class="fc-sub">React + Tailwind</div>
+      <div class="fc-sub">Pixel-perfect implementation from Figma to production-ready code using HTML, CSS, JavaScript, React, Bootstrap, and Shopify Liquid. Fully responsive and cross-browser optimized.</div>
     </div>
+    
   </div>
 </section>
 
@@ -623,14 +716,8 @@
     <div class="about-img-wrap reveal">
       <div class="about-img">
         <div class="about-img-inner">
-          <div class="profile-avatar">YN</div>
-          <div class="profile-name-ph">Your Name Here</div>
-          <div class="profile-hint">Replace with your photo</div>
+          <img src="/Images/portfolio-image.webp" alt="Zubair's Photo">
         </div>
-      </div>
-      <div class="about-badge">
-        <div class="num">3+</div>
-        <div class="txt">Years of<br/>Experience</div>
       </div>
     </div>
     <div class="about-text reveal reveal-delay-1">
@@ -645,7 +732,7 @@
       <div class="about-highlights">
         <div class="highlight-item">
           <div class="hi-title">🛍️ E-Commerce Expert</div>
-          <div class="hi-sub">Shopify, BigCommerce, Squarespace</div>
+          <div class="hi-sub">Shopify, BigCommerce, SquareSpace, WebFlow</div>
         </div>
         <div class="highlight-item">
           <div class="hi-title">⚡ Performance First</div>
@@ -658,6 +745,10 @@
         <div class="highlight-item">
           <div class="hi-title">🔄 Platform Migration</div>
           <div class="hi-sub">Zero data loss, zero downtime</div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-title">📣 Funnels and Tracking</div>
+          <div class="hi-sub">GoHighLevel, HubSpot</div>
         </div>
       </div>
     </div>
@@ -682,16 +773,16 @@
         <div class="platform-card reveal reveal-delay-1">
           <div class="platform-icon">🏪</div>
           <h4>BigCommerce</h4>
-          <div class="level"><span>Expert</span> · Stencil/Handlebars</div>
+          <div class="level"><span>Good</span> · Stencil/Handlebars</div>
         </div>
         <div class="platform-card reveal reveal-delay-2">
           <div class="platform-icon">⬛</div>
-          <h4>Squarespace</h4>
-          <div class="level"><span>Strong</span> · Full Customization</div>
+          <h4>SquareSpace</h4>
+          <div class="level"><span>Expert</span> · Full Customization</div>
         </div>
         <div class="platform-card reveal">
           <div class="platform-icon">🌊</div>
-          <h4>Webflow</h4>
+          <h4>WebFlow</h4>
           <div class="level"><span>Advanced</span> · CMS & Interactions</div>
         </div>
         <div class="platform-card reveal reveal-delay-1">
@@ -713,33 +804,38 @@
         <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">Shopify / Liquid</span><span class="skill-pct">96%</span></div>
+        <div class="skill-header"><span class="skill-name">Shopify / Liquid</span><span class="skill-pct">95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">SquareSpace</span><span class="skill-pct">96%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="96"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">BigCommerce / Stencil</span><span class="skill-pct">93%</span></div>
-        <div class="skill-bar"><div class="skill-fill" data-width="93"></div></div>
+        <div class="skill-header"><span class="skill-name">BigCommerce / Stencil</span><span class="skill-pct">60%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">React / Next.js</span><span class="skill-pct">85%</span></div>
-        <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        <div class="skill-header"><span class="skill-name">React / Next.js</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
       </div>
       <div class="skill-item">
         <div class="skill-header"><span class="skill-name">Figma to Code</span><span class="skill-pct">95%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">SEO & Performance</span><span class="skill-pct">88%</span></div>
-        <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+        <div class="skill-header"><span class="skill-name">SEO & Performance</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">Python / Scripting</span><span class="skill-pct">75%</span></div>
-        <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        <div class="skill-header"><span class="skill-name">Python / Scripting</span><span class="skill-pct">60%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
       </div>
       <div class="tags-section">
         <h3>Also Know</h3>
         <div class="tags-wrap">
           <span class="tag">Tailwind CSS</span>
+          <span class="tag">BootStrap</span>
           <span class="tag">GSAP</span>
           <span class="tag">Sass/SCSS</span>
           <span class="tag">jQuery</span>
@@ -754,6 +850,7 @@
           <span class="tag">Figma</span>
           <span class="tag">Mega Menu</span>
           <span class="tag">Custom Cart</span>
+          <span class="tag">Swatches</span>
         </div>
       </div>
     </div>
@@ -771,8 +868,8 @@
     <div class="service-card reveal">
       <div class="svc-icon">🛍️</div>
       <h3>E-Commerce Development</h3>
-      <p>Full store setup, theme customization, cart optimization, checkout UX, and product page enhancements for Shopify, BigCommerce, and more.</p>
-      <div class="svc-tags"><span class="svc-tag">Shopify</span><span class="svc-tag">BigCommerce</span><span class="svc-tag">Liquid</span></div>
+      <p>Full store setup, theme customization, cart optimization, checkout UX, and product page enhancements for Shopify, BigCommerce, SquareSpace and more.</p>
+      <div class="svc-tags"><span class="svc-tag">Shopify</span><span class="svc-tag">BigCommerce</span><span class="svc-tag">Liquid</span><span class="svc-tag">SQS</span></div>
     </div>
     <div class="service-card reveal reveal-delay-1">
       <div class="svc-icon">🔄</div>
@@ -790,7 +887,7 @@
       <div class="svc-icon">📄</div>
       <h3>Landing Page Design</h3>
       <p>High-converting landing pages optimized for speed, aesthetics, and lead generation — from simple static to dynamic multi-section pages.</p>
-      <div class="svc-tags"><span class="svc-tag">Conversion</span><span class="svc-tag">GHL</span><span class="svc-tag">Webflow</span></div>
+      <div class="svc-tags"><span class="svc-tag">Conversion</span><span class="svc-tag">GHL</span><span class="svc-tag">Webflow</span><span class="svc-tag">BootStrap</span></div>
     </div>
     <div class="service-card reveal reveal-delay-1">
       <div class="svc-icon">⚡</div>
@@ -801,8 +898,8 @@
     <div class="service-card reveal reveal-delay-2">
       <div class="svc-icon">🧩</div>
       <h3>Theme Customization</h3>
-      <p>Deep customizations: mega menus, custom cart drawers, product tabs, sticky headers, and complex UI components tailored to your brand.</p>
-      <div class="svc-tags"><span class="svc-tag">Mega Menu</span><span class="svc-tag">Cart Drawer</span><span class="svc-tag">Custom UI</span></div>
+      <p>Deep customizations: Full Theme, mega menus, custom cart drawers, product tabs, Swatches, sticky headers, and complex UI components tailored to your brand.</p>
+      <div class="svc-tags"><span class="svc-tag">Mega Menu</span><span class="svc-tag">Cart Drawer</span><span class="svc-tag">Swatches</span><span class="svc-tag">Custom UI</span></div>
     </div>
   </div>
 </section>
@@ -818,6 +915,7 @@
     <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
     <button class="filter-btn" onclick="filterProjects('shopify', this)">Shopify</button>
     <button class="filter-btn" onclick="filterProjects('bigcommerce', this)">BigCommerce</button>
+    <button class="filter-btn" onclick="filterProjects('bigcommerce', this)">SquareSpace</button>
     <button class="filter-btn" onclick="filterProjects('landing', this)">Landing Pages</button>
     <button class="filter-btn" onclick="filterProjects('migration', this)">Migration</button>
   </div>
@@ -929,91 +1027,6 @@
     </div>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div style="text-align:center; max-width:600px; margin:0 auto 4rem;">
-    <div class="section-tag reveal">Client Reviews</div>
-    <h2 class="section-title reveal reveal-delay-1">What Clients <span style="color:var(--accent)">Say</span></h2>
-    <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;">Real feedback from real projects — satisfaction guaranteed.</p>
-  </div>
-  <div class="testi-container reveal">
-    <div class="testi-track-wrap">
-      <div class="testi-track" id="testiTrack">
-        <div class="testi-slide">
-          <div class="testi-inner">
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"Absolutely incredible work! Migrated our entire Squarespace store to Shopify with zero issues. Every product, every SEO URL, every blog post — perfectly preserved. The new design is 10x better."</p>
-              <div class="testi-author">
-                <div class="testi-avatar">SM</div>
-                <div class="testi-info"><div class="name">Sarah Mitchell</div><div class="role">Founder, Bloom Boutique</div></div>
-              </div>
-            </div>
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"Our PageSpeed went from 38 to 94 in just two days. Sales improved noticeably within a week. The best investment we made for our BigCommerce store."</p>
-              <div class="testi-author">
-                <div class="testi-avatar">JK</div>
-                <div class="testi-info"><div class="name">James Kovacs</div><div class="role">CEO, TechGear Store</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-slide">
-          <div class="testi-inner">
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"Built our GHL funnel from scratch — the landing page looks stunning and our leads tripled in the first month. Communicates clearly and delivers fast."</p>
-              <div class="testi-author">
-                <div class="testi-avatar">AL</div>
-                <div class="testi-info"><div class="name">Amanda Lee</div><div class="role">Marketing Director, GrowthLab</div></div>
-              </div>
-            </div>
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"Our Figma design was complex and I was worried nobody could code it properly. He nailed it — pixel-perfect, fast, fully responsive. Will definitely work again."</p>
-              <div class="testi-author">
-                <div class="testi-avatar">RP</div>
-                <div class="testi-info"><div class="name">Ravi Patel</div><div class="role">Product Designer, Nexus Studio</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-slide">
-          <div class="testi-inner">
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"The custom mega menu he built for our Shopify store is exactly what we wanted. Customers love it, and our navigation click-throughs doubled."</p>
-              <div class="testi-author">
-                <div class="testi-avatar">TC</div>
-                <div class="testi-info"><div class="name">Tom Chen</div><div class="role">E-Commerce Manager, StyleCo</div></div>
-              </div>
-            </div>
-            <div class="testi-card">
-              <div class="stars">★★★★★</div>
-              <p class="testi-text">"HubSpot CMS customization done right — clean code, fast pages, and everything works perfectly with our marketing automation. Highly recommend!"</p>
-              <div class="testi-author">
-                <div class="testi-avatar">NK</div>
-                <div class="testi-info"><div class="name">Nina Kowalski</div><div class="role">Head of Digital, Markovia</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-controls">
-      <button class="testi-btn" onclick="moveTesti(-1)">←</button>
-      <div class="testi-dots" id="testiDots">
-        <div class="testi-dot active" onclick="goTesti(0)"></div>
-        <div class="testi-dot" onclick="goTesti(1)"></div>
-        <div class="testi-dot" onclick="goTesti(2)"></div>
-      </div>
-      <button class="testi-btn" onclick="moveTesti(1)">→</button>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-grid">
@@ -1023,17 +1036,17 @@
       <p>Have a project in mind? Whether it's a quick fix or a full build — I'm here. Reach out and let's discuss what you need.</p>
       <div class="contact-items">
         <div class="contact-item">
-          <div class="ci-icon">📧</div>
+          <div class="ci-icon">📞 </div>
           <div class="ci-text">
-            <div class="label">Email</div>
-            <div class="val">your@email.com</div>
+            <div class="label">Phone</div>
+            <div class="val"><a href="tel:03041824328" style="text-decoration: none;">(+92) 304-1824328</a></div>
           </div>
         </div>
         <div class="contact-item">
-          <div class="ci-icon">💼</div>
+          <div class="ci-icon">📧</div>
           <div class="ci-text">
-            <div class="label">Upwork / Fiverr</div>
-            <div class="val">@yourprofile</div>
+            <div class="label">Email</div>
+            <div class="val"><a href="mailto: zubair.raza.work@gmail.com">zubair.raza.work@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -1051,12 +1064,6 @@
           </div>
         </div>
       </div>
-      <div class="socials">
-        <a href="#" class="social-btn" title="LinkedIn">in</a>
-        <a href="#" class="social-btn" title="GitHub">gh</a>
-        <a href="#" class="social-btn" title="Twitter">tw</a>
-        <a href="#" class="social-btn" title="Upwork">up</a>
-      </div>
     </div>
     <div class="reveal reveal-delay-1">
       <div class="contact-form" id="contactForm">
@@ -1069,6 +1076,10 @@
             <label>Last Name</label>
             <input type="text" placeholder="Doe" />
           </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="email" placeholder="(+92) 0300000000" />
         </div>
         <div class="form-group">
           <label>Email Address</label>
@@ -1110,7 +1121,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="logo">Your<span>Name</span></div>
+      <div class="logo">Zubair<span>Raza</span></div>
       <p>Multi-platform web developer specializing in e-commerce, landing pages, theme customization, and platform migrations. Let's build something great.</p>
     </div>
     <div class="footer-col">
@@ -1128,8 +1139,8 @@
       <ul>
         <li><a href="#">Shopify</a></li>
         <li><a href="#">BigCommerce</a></li>
-        <li><a href="#">Squarespace</a></li>
-        <li><a href="#">Webflow</a></li>
+        <li><a href="#">SquareSpace</a></li>
+        <li><a href="#">WebFlow</a></li>
         <li><a href="#">GHL / HubSpot</a></li>
       </ul>
     </div>
@@ -1138,43 +1149,43 @@
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Portfolio</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="#">Download CV</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 <span>YourName</span>. Crafted with precision & passion.</p>
-    <div class="footer-socials">
-      <a href="#">in</a>
-      <a href="#">gh</a>
-      <a href="#">tw</a>
-    </div>
+    <p>© 2026 <span>zubair raza</span>. Crafted with precision & passion.</p>
   </div>
 </footer>
 
 <script>
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const isLight = document.body.classList.toggle('light-mode');
+    localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+    updateNavBg();
+  }
+  function updateNavBg() {
+    const isLight = document.body.classList.contains('light-mode');
+    const scrolled = window.scrollY > 50;
+    document.getElementById('navbar').style.background = isLight
+      ? (scrolled ? 'rgba(240,244,248,0.98)' : 'rgba(240,244,248,0.88)')
+      : (scrolled ? 'rgba(7,11,20,0.98)'     : 'rgba(7,11,20,0.85)');
+  }
+  (function () {
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'dark') {
+      document.body.classList.remove('light-mode');
+    } else {
+      document.body.classList.add('light-mode');
+    }
+  })();
+
   // Mobile menu
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
-
-  // Testimonials slider
-  let testiIndex = 0;
-  const slides = document.querySelectorAll('.testi-slide');
-  const dots = document.querySelectorAll('.testi-dot');
-  function goTesti(i) {
-    testiIndex = i;
-    document.getElementById('testiTrack').style.transform = 'translateX(-' + (i * 100) + '%)';
-    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-  }
-  function moveTesti(dir) {
-    testiIndex = (testiIndex + dir + slides.length) % slides.length;
-    goTesti(testiIndex);
-  }
-  setInterval(() => moveTesti(1), 6000);
-
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
@@ -1217,10 +1228,7 @@
   }
 
   // Navbar scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').style.background =
-      window.scrollY > 50 ? 'rgba(7,11,20,0.98)' : 'rgba(7,11,20,0.85)';
-  });
+  window.addEventListener('scroll', updateNavBg);
 </script>
 </body>
 </html>

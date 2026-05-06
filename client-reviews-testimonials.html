@@ -1,0 +1,150 @@
+                                                        <!-- css-->
+ <style>
+     /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--bg2); overflow: hidden; }
+  .testi-container { position: relative; }
+  .testi-track-wrap { overflow: hidden; border-radius: var(--radius); }
+  .testi-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .testi-slide { min-width: 100%; padding: 2px; }
+  .testi-inner { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .testi-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem;
+    position: relative;
+  }
+  .testi-card::before { content: '"'; font-size: 5rem; line-height: 1; font-family: 'Syne', sans-serif; font-weight: 800; color: rgba(0,212,255,0.1); position: absolute; top: 1rem; right: 1.5rem; }
+  .stars { color: var(--accent2); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #0077aa);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem; color: var(--bg);
+    font-family: 'Syne', sans-serif; flex-shrink: 0;
+  }
+  .testi-info .name { font-weight: 700; font-size: 0.92rem; }
+  .testi-info .role { font-size: 0.78rem; color: var(--muted); }
+  .testi-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 2rem; }
+  .testi-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--bg3); border: 1px solid var(--border);
+    color: var(--text); font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .testi-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .testi-dots { display: flex; gap: 8px; }
+  .testi-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.2s; }
+  .testi-dot.active { background: var(--accent); width: 24px; border-radius: 4px; } 
+ </style>
+
+                                                        <!-- Html -->
+
+<body>
+    <!-- NAV -->
+         <li><a href="#testimonials">Reviews</a></li>
+    <!-- MOBILE MENU -->
+        <a href="#testimonials" onclick="toggleMenu()">Reviews</a>  
+       
+    <!-- 1032 TESTIMONIALS -->
+     <section id="testimonials">
+  <div style="text-align:center; max-width:600px; margin:0 auto 4rem;">
+    <div class="section-tag reveal">Client Reviews</div>
+    <h2 class="section-title reveal reveal-delay-1">What Clients <span style="color:var(--accent)">Say</span></h2>
+    <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;">Real feedback from real projects — satisfaction guaranteed.</p>
+  </div>
+  <div class="testi-container reveal">
+    <div class="testi-track-wrap">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-slide">
+          <div class="testi-inner">
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"Absolutely incredible work! Migrated our entire Squarespace store to Shopify with zero issues. Every product, every SEO URL, every blog post — perfectly preserved. The new design is 10x better."</p>
+              <div class="testi-author">
+                <div class="testi-avatar">SM</div>
+                <div class="testi-info"><div class="name">Sarah Mitchell</div><div class="role">Founder, Bloom Boutique</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"Our PageSpeed went from 38 to 94 in just two days. Sales improved noticeably within a week. The best investment we made for our BigCommerce store."</p>
+              <div class="testi-author">
+                <div class="testi-avatar">JK</div>
+                <div class="testi-info"><div class="name">James Kovacs</div><div class="role">CEO, TechGear Store</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-inner">
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"Built our GHL funnel from scratch — the landing page looks stunning and our leads tripled in the first month. Communicates clearly and delivers fast."</p>
+              <div class="testi-author">
+                <div class="testi-avatar">AL</div>
+                <div class="testi-info"><div class="name">Amanda Lee</div><div class="role">Marketing Director, GrowthLab</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"Our Figma design was complex and I was worried nobody could code it properly. He nailed it — pixel-perfect, fast, fully responsive. Will definitely work again."</p>
+              <div class="testi-author">
+                <div class="testi-avatar">RP</div>
+                <div class="testi-info"><div class="name">Ravi Patel</div><div class="role">Product Designer, Nexus Studio</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-inner">
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"The custom mega menu he built for our Shopify store is exactly what we wanted. Customers love it, and our navigation click-throughs doubled."</p>
+              <div class="testi-author">
+                <div class="testi-avatar">TC</div>
+                <div class="testi-info"><div class="name">Tom Chen</div><div class="role">E-Commerce Manager, StyleCo</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="stars">★★★★★</div>
+              <p class="testi-text">"HubSpot CMS customization done right — clean code, fast pages, and everything works perfectly with our marketing automation. Highly recommend!"</p>
+              <div class="testi-author">
+                <div class="testi-avatar">NK</div>
+                <div class="testi-info"><div class="name">Nina Kowalski</div><div class="role">Head of Digital, Markovia</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" onclick="moveTesti(-1)">←</button>
+      <div class="testi-dots" id="testiDots">
+        <div class="testi-dot active" onclick="goTesti(0)"></div>
+        <div class="testi-dot" onclick="goTesti(1)"></div>
+        <div class="testi-dot" onclick="goTesti(2)"></div>
+      </div>
+      <button class="testi-btn" onclick="moveTesti(1)">→</button>
+    </div>
+  </div>
+</section>
+<script>
+      //1196 Testimonials slider
+let testiIndex = 0;
+const slides = document.querySelectorAll('.testi-slide');
+const dots = document.querySelectorAll('.testi-dot');
+function goTesti(i) {
+   testiIndex = i;
+  document.getElementById('testiTrack').style.transform = 'translateX(-' + (i * 100) + '%)';
+  dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+ function moveTesti(dir) {
+  testiIndex = (testiIndex + dir + slides.length) % slides.length;
+  goTesti(testiIndex);
+ }
+setInterval(() => moveTesti(1), 6000);
+
+</script>
+</body>
