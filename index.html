@@ -672,7 +672,6 @@
       <span class="platform-tag">Shopify</span>
       <span class="platform-tag">BigCommerce</span>
       <span class="platform-tag">SquareSpace</span>
-      <span class="platform-tag">WebFlow</span>
       <span class="platform-tag">GHL</span>
       <span class="platform-tag">HubSpot</span>
       <span class="platform-tag">React</span>
@@ -688,7 +687,6 @@
     <div class="floating-card">
       <div class="fc-label">Latest Project</div>
       <div class="fc-val">Shopify Store</div>
-      <div class="fc-sub">↑ 40% conversion boost</div>
       <div class="fc-dots">
         <div class="fc-dot" style="background:#00d4ff"></div>
         <div class="fc-dot" style="background:#f59e0b"></div>
@@ -804,8 +802,8 @@
         <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-header"><span class="skill-name">Shopify / Liquid</span><span class="skill-pct">95%</span></div>
-        <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+        <div class="skill-header"><span class="skill-name">Shopify / Liquid</span><span class="skill-pct">97%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="97"></div></div>
       </div>
       <div class="skill-item">
         <div class="skill-header"><span class="skill-name">SquareSpace</span><span class="skill-pct">96%</span></div>
@@ -1039,7 +1037,7 @@
           <div class="ci-icon">📞 </div>
           <div class="ci-text">
             <div class="label">Phone</div>
-            <div class="val"><a href="tel:03041824328" style="text-decoration: none;">(+92) 304-1824328</a></div>
+            <div class="val"><a href="tel:03041824328" style="text-decoration: none;">+92 304 1824328</a></div>
           </div>
         </div>
         <div class="contact-item">
@@ -1150,7 +1148,8 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#">Download CV</a></li>
+        <li><a href="Zubair-Raza-Resume.pdf" download>Download CV</a></li>
+        <li><a href="https://www.upwork.com/freelancers/~017b4ee398857be80a?viewMode=1">upwork</a></li>
       </ul>
     </div>
   </div>
@@ -1217,15 +1216,30 @@
   }
 
   // Contact form
-  function submitForm() {
-    const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea, #contactForm select');
-    let filled = true;
-    inputs.forEach(i => { if (!i.value.trim()) filled = false; });
-    if (!filled) { alert('Please fill in all fields.'); return; }
-    document.getElementById('formSuccess').style.display = 'block';
-    inputs.forEach(i => i.value = '');
-    setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
-  }
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      message: document.getElementById('message').value
+    };
+    
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlkKQX8a57cgpAO365IIykXx0i_rtUj05N1IXYsl1AQhkcHFEiZPkZ0qz4cdv3fPNljw/exec';
+    
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert('Message sent successfully! I will get back to you soon.');
+      document.getElementById('contact-form').reset();
+    })
+    .catch(error => {
+      alert('Something went wrong. Please try again.');
+    });
+  });
 
   // Navbar scroll effect
   window.addEventListener('scroll', updateNavBg);
