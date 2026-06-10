@@ -1159,7 +1159,6 @@
 </footer>
 
 <script>
-  // ── THEME TOGGLE ──
   function toggleTheme() {
     const isLight = document.body.classList.toggle('light-mode');
     localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
@@ -1180,19 +1179,14 @@
       document.body.classList.add('light-mode');
     }
   })();
-
-  // Mobile menu
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
-
-  // Skill bars animation
   const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1204,8 +1198,6 @@
   }, { threshold: 0.3 });
   const skillSection = document.getElementById('skills');
   if (skillSection) skillObserver.observe(skillSection);
-
-  // Project filter
   function filterProjects(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -1214,8 +1206,6 @@
       card.style.display = show ? 'block' : 'none';
     });
   }
-
-  // Contact form
   function submitForm() {
     var firstName = document.getElementById('firstName').value.trim();
     var lastName  = document.getElementById('lastName').value.trim();
@@ -1223,21 +1213,17 @@
     var email     = document.getElementById('email').value.trim();
     var service   = document.getElementById('service').value.trim();
     var message   = document.getElementById('message').value.trim();
-
-    // Basic validation
     if (!firstName || !email || !message) {
       alert('Please fill in First Name, Email, and Project Details.');
       return;
     }
-
     var btn = document.querySelector('.form-submit');
     btn.textContent = 'Sending...';
     btn.disabled = true;
-
     var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbymM4EdcPLcoCLZ0Je9_b9tRZV0wmoYQCpxTBXprcXZZey3qColMeZAJU4rcWMBr5A1Fg/exec';
-
     fetch(SCRIPT_URL, {
       method: 'POST',
+      mode: 'no-cors',
       body: JSON.stringify({
         name: firstName + ' ' + lastName,
         phone: phone,
@@ -1246,21 +1232,18 @@
         message: message
       })
     })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
+    .then(function() {
       document.getElementById('formSuccess').style.display = 'block';
       document.getElementById('contactForm').reset();
       btn.textContent = 'Send Message →';
       btn.disabled = false;
     })
-    .catch(function(err) {
+    .catch(function() {
       alert('Something went wrong. Please try again.');
       btn.textContent = 'Send Message →';
       btn.disabled = false;
     });
   }
-
-  // Navbar scroll effect
   window.addEventListener('scroll', updateNavBg);
 </script>
 </body>
